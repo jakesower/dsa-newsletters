@@ -1,0 +1,28 @@
+{
+  "name": "dsadc-newsletters",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "build": "browserify ./main.js -o displayer.js -v",
+    "watch": "watchify ./main.js -o displayer.js -v",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakesower/dsa-newsletters.git"
+  },
+  "author": "Jake Sower",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/jakesower/dsa-newsletters/issues"
+  },
+  "homepage": "https://github.com/jakesower/dsa-newsletters#readme",
+  "dependencies": {
+    "marked": "^0.3.6"
+  },
+  "devDependencies": {
+    "browserify": "^13.3.0",
+    "watchify": "^3.8.0"
+  }
+}

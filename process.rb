@@ -1,7 +1,11 @@
 #!/usr/bin/ruby
 
+# The script will output JSON representing all articles from the source
+# newsletters. It will be written to stdout by default.
+
 require 'fileutils'
 require 'date'
+require 'json'
 
 # Note: pandoc is required to use this script. See: http://pandoc.org
 
@@ -15,6 +19,7 @@ CONFIG = {
     '”' => '"',
     '‘' => "'",
     '’' => "'",
+    '–' => '–',
     '…' => '...',
     ' ' => '',  # weird artifact characters
     /!\[\]\(media[^}]+}/ => ''
@@ -125,8 +130,10 @@ get_introduction = ->( lines ) do
   return nil if !intro_start || intro_end <= intro_start
 
   {
-    title: "Introduction to the #{issue} Issue",
+    title: "The Washington Socialist—#{issue} Issue",
     author: author,
+    issue: issue,
+    order: -1,
     date: extract_line.( lines[intro_start] ),
     body: format_body_lines.( lines[(intro_start + 1)..intro_end] )
   }
@@ -137,8 +144,10 @@ get_articles = ->( lines, no_id = false ) do
   idxs = article_indices.( lines, no_id )
   pairs = idxs.each_with_index.map{|x,idx| [x, idxs[idx+1] ? idxs[idx+1]-1 : -1]}
   default_date = extract_line.(lines.find{|l| l[:type] == :date})
+  issue_line = lines.find{|l| l[:line] =~ /\*\*Articles from( the)? /}
+  issue = issue_line[:line].match(/from( the)? (.*) Issue/).captures[1]
 
-  pairs.map do |p|
+  pairs.each_with_index.map do |p,idx|
     ls = lines[p[0]..p[1]]
     body_start = (1..(ls.length - 1)).to_a.find{|i| ls[i][:type] == :generic}
     byline = ls.find{|l| l[:type] == :byline}
@@ -153,12 +162,19 @@ get_articles = ->( lines, no_id = false ) do
     {
       title: extract_line.(ls[0], :title),
       date: date ? extract_line.(date) : default_date,
+      issue: issue,
       author: byline ? extract_line.(byline) : '',
-      body: format_body_lines.( ls[ body_start..-1 ])
+      body: format_body_lines.( ls[ body_start..-1 ]),
+      order: idx
     }
   end
 end
 
+
+def recode_windows_1252_to_utf8(string)
+  string.gsub(/[\u0080-\u009F]/) {|x| x.getbyte(1).chr.
+    force_encoding('windows-1252').encode('utf-8') }
+end
 
 # Convert documents to markdown
 FileUtils.mkdir_p( CONFIG[:md_dir] )
@@ -169,11 +185,15 @@ end
 # Begin extracting articles from the md files
 files = Dir.new( CONFIG[:md_dir] ).select{|f| !File.directory?( f )}
 no_ids = [ 'The Washington Socialist-November 2012.md', 'The Washington Socialist-October 2012.md', 'The Washington Socialist-September 2012.md' ]
-# files = no_ids
+
 out = files.flat_map do |f|
-  puts f
   no_id = no_ids.include?( f )
-  corpus = CONFIG[:charmap].reduce( File.read( "#{CONFIG[:md_dir]}/#{f}" )) do |memo, (s,r)|
+  raw_corpus = File.read( "#{CONFIG[:md_dir]}/#{f}" )
+  raw_corpus = recode_windows_1252_to_utf8( raw_corpus )
+
+  # puts raw_corpus
+  # exit 0
+  corpus = CONFIG[:charmap].reduce( raw_corpus ) do |memo, (s,r)|
     memo.gsub( s, r )
   end
 
@@ -184,4 +204,4 @@ out = files.flat_map do |f|
   intro ? get_articles.(lines) << get_introduction.(lines) : get_articles.(lines, no_id)
 end
 
-puts out.map{|o| o[:title]}
+puts "window.newsletters = #{ JSON.generate( out ) }";
