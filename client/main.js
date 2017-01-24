@@ -49,6 +49,4 @@ window.newsletterDisplayer = function ( newsletters ) {
 
   displayIssueList( nav, getIssues() );
 
-
-
 };

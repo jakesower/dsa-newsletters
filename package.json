@@ -4,8 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "browserify ./main.js -o displayer.js -v",
-    "watch": "watchify ./main.js -o displayer.js -v",
+    "build": "browserify ./client/main.js -o ./client/displayer.js -v",
+    "watch": "watchify ./client/main.js -o ./client/displayer.js -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
