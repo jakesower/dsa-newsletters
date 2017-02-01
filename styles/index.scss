@@ -1,0 +1,18 @@
+@import 'variables';
+@import 'media';
+
+aside {
+  img.dsa-logo {
+    height: 150px;
+  }
+
+  h2 {
+    font-size: 100%;
+  }
+}
+
+a {
+  color: darken( $dc-blue, 10% );
+}
+
+@import 'newsletters';

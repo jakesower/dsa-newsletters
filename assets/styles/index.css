@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "Manifold DSA";
+  src: url("/assets/fonts/ManifoldDSA-Regular.eot") format("eot"), url("/assets/fonts/ManifoldDSA-Regular.woff2") format("woff2"), url("/assets/fonts/ManifoldDSA-Regular.woff") format("woff"); }
+
+@media screen and (max-width: 320px) {
+  body {
+    background-color: red; } }
+
+@media screen and (min-width: 321px) {
+  body {
+    font-family: "Manifold DSA", sans-serif;
+    background-color: #ffffff;
+    color: #231f20;
+    max-width: 1200px;
+    margin: 0 auto; }
+  div.main-box {
+    display: flex;
+    justify-content: center; }
+  div.main-box > * {
+    margin-top: 2em; }
+  aside {
+    flex: 1 1 auto;
+    min-width: 10em;
+    order: 2;
+    line-height: 150%; }
+  main {
+    flex: 3 1 auto;
+    order: 3;
+    line-height: 170%; } }
+
+aside img.dsa-logo {
+  height: 150px; }
+
+aside h2 {
+  font-size: 100%; }
+
+a {
+  color: #407a86; }
+
+@font-face {
+  font-family: "Manifold DSA";
+  src: url("/assets/fonts/ManifoldDSA-Regular.eot") format("eot"), url("/assets/fonts/ManifoldDSA-Regular.woff2") format("woff2"), url("/assets/fonts/ManifoldDSA-Regular.woff") format("woff"); }
+
+h1 {
+  color: #5199a8; }
+
+aside h1:first-child {
+  margin-top: 0; }
+
+main article {
+  width: 29em;
+  font-size: 130%;
+  border-bottom: #333 1px solid; }
+  main article:first-child h1:first-child {
+    margin-top: 0; }
+  main article:last-child {
+    border-bottom: none; }
+  main article h1 {
+    line-height: 114%; }
+
+main .author {
+  font-style: italic;
+  display: block;
+  padding-top: 4px; }
+  main .author::before {
+    content: "by "; }
+
+main .issue {
+  font-weight: bold;
+  padding: 0.4em 0; }
+  main .issue .ws-id {
+    font-style: italic; }
+
+main time {
+  display: block;
+  font-size: 70%;
+  border-bottom: solid 1px #d6d1d2; }

@@ -22,7 +22,13 @@ CONFIG = {
     '–' => '–',
     '…' => '...',
     ' ' => '',  # weird artifact characters
-    /!\[\]\(media[^}]+}/ => ''
+    /!\[\]\(media[^}]+}/ => '',
+
+    # pandoc artifacts
+    '\\$' => '$',
+    /\\$/ => '',
+    /\^([a-z]+)\^/i => '<sup>\1</sup>'
+
   },
   patterns: {
     id: /^[* ]*The Washington Socialist[* ]*&lt;&gt; (#{MONTHS.join('|')}|Midsummer|Summer|Labor Day) \d{4}[* ]*$/,
@@ -204,4 +210,4 @@ out = files.flat_map do |f|
   intro ? get_articles.(lines) << get_introduction.(lines) : get_articles.(lines, no_id)
 end
 
-puts "window.newsletters = #{ JSON.generate( out ) }";
+puts JSON.generate( out );

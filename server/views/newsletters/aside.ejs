@@ -1,0 +1,17 @@
+<h1>Past Issues</h1>
+<% const issuesByYear = issues.
+  reduce(( a, i ) => {
+    const y = i.split(' ')[1];
+    return Object.assign( {}, a, { [y]: (y in a) ? a[y].concat( i ) : [i] })
+  }, {});
+
+  Object.keys( issuesByYear )
+    .sort((a,b) => b - a )
+    .forEach( issueYear => { %>
+      <h2><%= issueYear %></h2>
+      <% issuesByYear[ issueYear ].forEach( issue => { %>
+        <div>
+          <a href="/newsletters/<%= slug( issue ) %>"><%= issue %></a>
+        </div>
+  <% }) %>
+<% }) %>

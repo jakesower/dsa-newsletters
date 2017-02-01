@@ -26,7 +26,8 @@ app.get( '/newsletters', ( req, res ) => {
 });
 
 
-app.use( serveStatic( path.join( __dirname, '..', 'public' )));
+// app.use( serveStatic( path.join( __dirname, '..', 'assets' )));
+app.use( '/assets', express.static( __dirname + '/../assets' ));
 
 app.listen( 3000, function() {
   console.log( 'Listening on port 3000' );

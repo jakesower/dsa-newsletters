@@ -1,0 +1,57 @@
+@import 'variables';
+
+h1 {
+  color: $dc-blue;
+}
+
+aside {
+  h1:first-child {
+    margin-top: 0;
+  }
+}
+
+main {
+  article {
+    width: 29em;
+    font-size: 130%;
+    border-bottom: #333 1px solid;
+
+    &:first-child h1:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    h1 {
+      line-height: 114%;
+    }
+  }
+
+  .author {
+    font-style: italic;
+    display: block;
+    padding-top: 4px;
+
+    &::before {
+      content: "by ";
+    }
+  }
+
+  .issue {
+    font-weight: bold;
+    padding: 0.4em 0;
+
+    .ws-id {
+      font-style: italic;
+    }
+  }
+
+  time {
+    display: block;
+    font-size: 70%;
+    border-bottom: solid 1px lighten($dsa-black, 70%);
+  }
+
+}

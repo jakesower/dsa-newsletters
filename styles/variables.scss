@@ -1,0 +1,16 @@
+// National DSA Styles
+$dsa-red: #ec1f27;
+$dsa-black: #231f20;
+$dsa-white: #ffffff;
+
+@font-face {
+  font-family: "Manifold DSA";
+  src: url("/assets/fonts/ManifoldDSA-Regular.eot") format("eot"),
+       url("/assets/fonts/ManifoldDSA-Regular.woff2") format("woff2"),
+       url("/assets/fonts/ManifoldDSA-Regular.woff") format("woff");
+}
+
+$dsa-font: "Manifold DSA";
+
+// DSA DC Styles
+$dc-blue: #5199a8;

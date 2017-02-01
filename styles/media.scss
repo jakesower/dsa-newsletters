@@ -1,0 +1,38 @@
+@media screen and (max-width: 320px) {
+  body {
+    background-color: red;
+  }
+}
+
+
+@media screen and (min-width: 321px) {
+  body {
+    font-family: $dsa-font, sans-serif;
+    background-color: $dsa-white;
+    color: $dsa-black;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  div.main-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  div.main-box > * {
+    margin-top: 2em;
+  }
+
+  aside {
+    flex: 1 1 auto;
+    min-width: 10em;
+    order: 2;
+    line-height: 150%;
+  }
+
+  main {
+    flex: 3 1 auto;
+    order: 3;
+    line-height: 170%;
+  }
+}

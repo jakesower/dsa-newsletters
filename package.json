@@ -4,9 +4,12 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "build": "browserify ./client/main.js -o ./public/displayer.js -v",
-    "watch": "watchify ./client/main.js -o ./public/displayer.js -v",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-sass": "mkdirp assets/styles && node-sass styles/index.scss -o assets/styles",
+    "watch-sass": "mkdirp assets/styles && node-sass -wr styles/*.scss -o assets/styles",
+    "build-js": "mkdirp assets/javascripts && browserify client/main.js | uglifyjs -o assets/javascripts/bundle.js",
+    "watch-js": "mkdirp assets/javascripts && watchify client/main.js -o assets/javascripts/bundle.js -dv",
+    "build": "parallelshell 'npm run build-sass' 'npm run build-js'",
+    "watch": "parallelshell 'npm run watch-sass' 'npm run watch-js'"
   },
   "repository": {
     "type": "git",
@@ -19,13 +22,17 @@
   },
   "homepage": "https://github.com/jakesower/dsa-newsletters#readme",
   "dependencies": {
+    "dateformat": "^2.0.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "marked": "^0.3.6",
-    "serve-static": "^1.11.2"
+    "serve-assets": "^1.11.2"
   },
   "devDependencies": {
     "browserify": "^13.3.0",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.4.0",
+    "parallelshell": "^2.0.0",
     "watchify": "^3.8.0"
   }
 }

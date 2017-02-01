@@ -3,26 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>The Washington Socialist</title>
+    <link rel="stylesheet" href="/assets/styles/index.css" type="text/css" />
   </head>
 
   <body>
-    <style>
-      body {
-        display: flex;
-      }
+    <div class="main-box">
+      <aside>
+        <img src="/assets/images/logo.jpg" class="dsa-logo">
+        <%- aside %>
+      </aside>
 
-      nav {
-        flex: 1 1 auto;
-        min-width: 20em;
-      }
-
-      main {
-        flex: 3 1 auto;
-      }
-    </style>
-
-    <nav><%- nav %></nav>
-    <main><%- main %></main>
-
+      <%- content %>
+    </div>
   </body>
 </html>

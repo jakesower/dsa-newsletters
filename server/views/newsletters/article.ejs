@@ -1,5 +1,7 @@
 <article>
   <h1><%= title %></h1>
-  <span class="author"><%= author %></span>
+  <time datetime="<%= standardDate %>"><%= displayDate %></time>
+  <div class="issue"><span class="ws-id">The Washington Socialist</span> &lt;&gt; <%= issue %></div>
+  <div class="author"><%= author %></div>
   <%- body %>
 </article>
